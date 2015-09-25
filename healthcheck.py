@@ -1,8 +1,29 @@
-__author__ = 'mitty01'
+#!/usr/bin/python
+
+# Copyright 2015 Actian Corporation
+ 
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+ 
+#      http://www.apache.org/licenses/LICENSE-2.0
+ 
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
 
 class Cluster():
-
-    def capacity():
+    """Functions for (mostly) pre-install checks of Hadoop/HDFS"""
+    
+    def capacity(self):
+        """
+        Settings related to recommended and current capacity needed for cluster.
+        Not currently used.
+        
+        Returns recommended settings dictionary.
+        """
         recommended = {
           "Master Min Cores":6,
             "Master Min RAM GB":96,
@@ -16,7 +37,8 @@ class Cluster():
     def hdfsreport(self,hdfs_bin_location='/usr/bin/hdfs'):
         """Return results of the HDFS Cluster Report
 
-        Must be run as root or as HDFS superuser
+        Popen call to dfsadmin utility will attempt to be run as 
+        root or HDFS superuser
 
         Returns:
             node_count      int             number of nodes reported in cluster
@@ -91,7 +113,8 @@ class Cluster():
     def pingtest(self,host_list):
             """
                 hdfsreport.host_list
-                return node dictionary with ping boolean
+                
+                Returns node dictionary with ping boolean
                                 
             """
             import commands # yes, deprecated in future but easier than subprocess.Popen
@@ -106,7 +129,8 @@ class Cluster():
     def pinglatency(self,host_list):
             """
                 hdfsreport.host_list
-                return node dictionary with latency timing over 5 pings
+                
+                Returns node dictionary with average latency timing over 5 pings
 
                 PING localhost (127.0.0.1) 56(84) bytes of data.
                 64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.029 ms
@@ -132,32 +156,31 @@ class Cluster():
             return ping_status
 
     def hdfstopology(self,hdfs_bin_location='/usr/bin/hdfs'):
-        from subprocess import Popen, PIPE, call
-
-        '''
-        # Full raw output example follows:
-        #$ hdfs dfsadmin -printTopology
-                #Rack: /default-rack
-                #   172.16.68.2:50010 (padb-cluster2)
-                #   172.16.68.3:50010 (padb-cluster3)
-                #   172.16.68.4:50010 (padb-cluster4)
-                #   172.16.68.5:50010 (padb-cluster5)
-                #   172.16.68.6:50010 (padb-cluster6)
-                #   172.16.68.7:50010 (padb-cluster7)
+        """
+        Currently barely useful, not used for health check but is another
+        simple way to get a dictionary of hostname:ip.
+        
+        Full raw output from dfsadmin command:
+        $ hdfs dfsadmin -printTopology
+                Rack: /default-rack
+                   172.16.68.2:50010 (padb-cluster2)
+                   172.16.68.3:50010 (padb-cluster3)
+                   172.16.68.4:50010 (padb-cluster4)
+                   172.16.68.5:50010 (padb-cluster5)
+                   172.16.68.6:50010 (padb-cluster6)
+                   172.16.68.7:50010 (padb-cluster7)
                 
         Returns list of Racks, with dictionaries of {hostname: ip}
-        '''
+        """
+        from subprocess import Popen, PIPE, call
         
         cmdreport = Popen(['su hdfs -c ' + hdfs_bin_location +  '" dfsadmin -printTopology"'], stdout=PIPE, shell=True).communicate()[0].strip()
         rack = cmdreport.split("\n")[0].split(":")[1].strip()
         host_list = cmdreport.split("\n")[1:]
         
-        print "hdfstopology function incomplete - assumes single rack"
-        
         return rack, host_list
 
     def netcheck(self,host):
-        from subprocess import Popen, PIPE, call
         """
         Check the network interfaces and their speeds for each node
         
@@ -165,25 +188,23 @@ class Cluster():
         :return: dictionary of interfaces and link speeds
         
         """
+        from subprocess import Popen, PIPE, call
         
-cmdreport = Popen('ssh -q {0} "ifconfig | grep HWaddr | awk \'{{print $1}}\'"'.format(host), stdout=PIPE, shell=True).communicate()[0].split("\n")
-
-for cmd in cmdreport:
-    cmdline = cmd.strip().split(" ")[0]
-    if cmdline:
-        if cmdline[0:3] == 'eth':
-            ifreport = Popen('ssh -q {0} "cat /sys/class/net/{1}/speed"'.format(host,cmdline), stdout=PIPE, shell=True).communicate()[0].strip()
-            print host + ": " + cmdline + ": "+ str(ifreport)
+        cmdreport = Popen('ssh -q {0} "ifconfig | grep HWaddr | awk \'{{print $1}}\'"'.format(host), stdout=PIPE, shell=True).communicate()[0].split("\n")
         
+        for cmd in cmdreport:
+            cmdline = cmd.strip().split(" ")[0]
+            if cmdline:
+                if cmdline[0:3] == 'eth':
+                    ifreport = Popen('ssh -q {0} "cat /sys/class/net/{1}/speed"'.format(host,cmdline), stdout=PIPE, shell=True).communicate()[0].strip()
+                    print host + ": " + cmdline + ": "+ str(ifreport)
         return True
 
-#class VectorH():
-
-#class RunAll():
-
-#class PAT():
-
-#class MQI():
+# Other potential classes stubbed in...
+    #class VectorH():
+    #class RunAll():
+    #class PAT():
+    #class MQI():
 
 class bcolors:
     HEADER = '\033[95m'
@@ -247,12 +268,7 @@ if __name__ == "__main__":
     nodes_status = set_status(a_nodes_target, nodes)
     cap_node_status = set_status((float(a_data_target)/a_nodes_target),cap_nodes)
 
-    # The following prints with colours highlighting missed targets, but dropping it in favour of table layout
-    #print ("Found\t" + nodes_status + "Nodes: {0}\t" + data_status + " Total Capacity: {1}\t" + cap_node_status + " Cap/Node: {2} ({3})\t" + bcolors.ENDC)\
-    #    .format(str(nodes),cap_str,str(round(cap_nodes,3)),cap_units)
-    #print ("Target\t" +nodes_status + "Nodes: {0}\t" + data_status + " Total Capacity: {1}\t" + cap_node_status + " Cap/Node: {2} ({3})\t" + bcolors.ENDC)\
-    #    .format(str(a_nodes_target),str(float(a_data_target))+" TB",str(round(float(a_data_target)/float(a_nodes_target),3)),cap_units)
-
+    # Prep for printing out a table of results in terminal
     Row = namedtuple('Row',['Type','Nodes','Total_Capacity','Cap_per_Node'])
     founddata=Row("Found",str(nodes),cap_str,str(round(cap_nodes,3)) + cap_units)
     targetdata=Row("Target",str(a_nodes_target),str(float(a_data_target))+" TB",str(round(float(a_data_target)/float(a_nodes_target),3)) + cap_units)
