@@ -1,0 +1,119 @@
+$ hdfs dfsadmin -report
+Configured Capacity: 11891787816960 (10.82 TB)
+Present Capacity: 11048274694144 (10.05 TB)
+DFS Remaining: 7313200758784 (6.65 TB)
+DFS Used: 3735073935360 (3.40 TB)
+DFS Used%: 33.81%
+Under replicated blocks: 7
+Blocks with corrupt replicas: 0
+Missing blocks: 0
+
+-------------------------------------------------
+Live datanodes (6):
+
+Name: 172.16.68.4:50010 (padb-cluster4)
+Hostname: padb-cluster4
+Decommission Status : Normal
+Configured Capacity: 1966463782912 (1.79 TB)
+DFS Used: 669794168832 (623.79 GB)
+Non DFS Used: 74584961024 (69.46 GB)
+DFS Remaining: 1222084653056 (1.11 TB)
+DFS Used%: 34.06%
+DFS Remaining%: 62.15%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Wed Sep 16 19:42:33 BST 2015
+
+
+Name: 172.16.68.6:50010 (padb-cluster6)
+Hostname: padb-cluster6
+Decommission Status : Normal
+Configured Capacity: 1966463782912 (1.79 TB)
+DFS Used: 658649309184 (613.41 GB)
+Non DFS Used: 74445078528 (69.33 GB)
+DFS Remaining: 1233369395200 (1.12 TB)
+DFS Used%: 33.49%
+DFS Remaining%: 62.72%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Wed Sep 16 19:42:34 BST 2015
+
+
+Name: 172.16.68.3:50010 (padb-cluster3)
+Hostname: padb-cluster3
+Decommission Status : Normal
+Configured Capacity: 1966463782912 (1.79 TB)
+DFS Used: 673073467392 (626.85 GB)
+Non DFS Used: 75985952768 (70.77 GB)
+DFS Remaining: 1217404362752 (1.11 TB)
+DFS Used%: 34.23%
+DFS Remaining%: 61.91%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Wed Sep 16 19:42:35 BST 2015
+
+
+Name: 172.16.68.5:50010 (padb-cluster5)
+Hostname: padb-cluster5
+Decommission Status : Normal
+Configured Capacity: 1966463782912 (1.79 TB)
+DFS Used: 673454743552 (627.20 GB)
+Non DFS Used: 301455536128 (280.75 GB)
+DFS Remaining: 991553503232 (923.46 GB)
+DFS Used%: 34.25%
+DFS Remaining%: 50.42%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 6
+Last contact: Wed Sep 16 19:42:35 BST 2015
+
+
+Name: 172.16.68.7:50010 (padb-cluster7)
+Hostname: padb-cluster7
+Decommission Status : Normal
+Configured Capacity: 2059468902400 (1.87 TB)
+DFS Used: 391189934080 (364.32 GB)
+Non DFS Used: 98882502656 (92.09 GB)
+DFS Remaining: 1569396465664 (1.43 TB)
+DFS Used%: 18.99%
+DFS Remaining%: 76.20%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Wed Sep 16 19:42:34 BST 2015
+
+
+Name: 172.16.68.2:50010 (padb-cluster2)
+Hostname: padb-cluster2
+Decommission Status : Normal
+Configured Capacity: 1966463782912 (1.79 TB)
+DFS Used: 668912312320 (622.97 GB)
+Non DFS Used: 218159091712 (203.18 GB)
+DFS Remaining: 1079392378880 (1005.26 GB)
+DFS Used%: 34.02%
+DFS Remaining%: 54.89%
+Configured Cache Capacity: 0 (0 B)
+Cache Used: 0 (0 B)
+Cache Remaining: 0 (0 B)
+Cache Used%: 100.00%
+Cache Remaining%: 0.00%
+Xceivers: 2
+Last contact: Wed Sep 16 19:42:35 BST 2015
