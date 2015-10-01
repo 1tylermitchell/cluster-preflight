@@ -200,6 +200,27 @@ class Cluster():
                     print host + ": " + cmdline + ": "+ str(ifreport)
         return True
 
+    def diskcheck(self,host_list):
+        """
+        Each node has a default hadoop script that checks health of all disks
+        sh /etc/hadoop/conf/health_check
+        
+        Output is like:
+        ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+         or
+        OK: disks ok,
+        
+        :param host: host name or IP address as string 
+
+        """
+        from subprocess import Popen, PIPE, call
+        disk_report = {}
+        for host in host_list:
+            cmdreport = Popen('ssh -q {0} "sh /etc/hadoop/conf/health_check"'.format(host), stdout=PIPE, shell=True).communicate()[0]
+            disk_report[host] = cmdreport
+        return disk_report
+    
+        
 # Other potential classes stubbed in...
     #class VectorH():
     #class RunAll():
@@ -289,3 +310,15 @@ if __name__ == "__main__":
         Row = namedtuple('Row',['Host','Latency'])
         for p in ping_results:
             print ("{0}\t{1}").format(p,ping_results[p])
+            
+    q_diskcheck = raw_input('Disk check all nodes (y/n)? [y]: ')
+    if (q_diskcheck != 'n'):
+        print "- Running disk check on all nodes"
+        disk_results=cluster.diskcheck(rep[3])
+        Row = namedtuple('Row',['Host','DiskReport'])
+        print_rows = []
+        for host in disk_results:
+            row_to_print = Row(host, disk_results[host].strip())
+            print_rows.append(row_to_print)
+        pp(print_rows)    
+
