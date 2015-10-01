@@ -180,25 +180,29 @@ class Cluster():
         
         return rack, host_list
 
-    def netcheck(self,host):
+    def netcheck(self,host_list):
         """
         Check the network interfaces and their speeds for each node
         
         :param host: host name or IP address as string 
-        :return: dictionary of interfaces and link speeds
-        
+        :return: dictionary of interfaces and link speeds - e.g.:
+                {'172.16.68.6': {'eth2': '1000', 'eth0': '10000'}}
         """
         from subprocess import Popen, PIPE, call
         
-        cmdreport = Popen('ssh -q {0} "ifconfig | grep HWaddr | awk \'{{print $1}}\'"'.format(host), stdout=PIPE, shell=True).communicate()[0].split("\n")
         
-        for cmd in cmdreport:
-            cmdline = cmd.strip().split(" ")[0]
-            if cmdline:
-                if cmdline[0:3] == 'eth':
-                    ifreport = Popen('ssh -q {0} "cat /sys/class/net/{1}/speed"'.format(host,cmdline), stdout=PIPE, shell=True).communicate()[0].strip()
-                    print host + ": " + cmdline + ": "+ str(ifreport)
-        return True
+        iface_report = {}
+        for host in host_list:
+            cmdreport = Popen('ssh -q {0} "ifconfig | grep HWaddr | awk \'{{print $1}}\'"'.format(host), stdout=PIPE, shell=True).communicate()[0].split("\n")
+            iface_report[host] = {}
+            for nic in cmdreport:
+                iface = nic.strip().split(" ")[0]
+                if iface:
+                    if iface[0:3] == 'eth':
+                        ifreport = Popen('ssh -q {0} "cat /sys/class/net/{1}/speed"'.format(host,iface), stdout=PIPE, shell=True).communicate()[0].strip()
+                        if str(ifreport) != "": 
+                            iface_report[host][iface]=str(ifreport)
+        return iface_report
 
     def diskcheck(self,host_list):
         """
@@ -219,6 +223,9 @@ class Cluster():
             cmdreport = Popen('ssh -q {0} "sh /etc/hadoop/conf/health_check"'.format(host), stdout=PIPE, shell=True).communicate()[0]
             disk_report[host] = cmdreport
         return disk_report
+    
+class Report:
+    """Use reportlab (https://bitbucket.org/rptlab/reportlab) or similar to push all these outputs into PDF"""
     
         
 # Other potential classes stubbed in...
@@ -322,3 +329,15 @@ if __name__ == "__main__":
             print_rows.append(row_to_print)
         pp(print_rows)    
 
+    q_niccheck = raw_input('Check network interface speeds (y/n)? [y]: ')
+    if (q_niccheck != 'n'):
+        print "- Running NIC check on all nodes"
+        nic_results=cluster.netcheck(rep[3])
+        Row = namedtuple('Row',['Host','Interface','Speed'])
+        print_rows = []
+        for host in nic_results:
+            for nic in nic_results[host]:
+                print "in nic in hosts: " + host,nic
+                row_to_print = Row(host,nic,nic_results[host][nic])
+                print_rows.append(row_to_print)
+        pp(print_rows)

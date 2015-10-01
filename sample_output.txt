@@ -36,3 +36,22 @@ Host        | DiskReport
 172.16.68.5 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
 172.16.68.2 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
 172.16.68.3 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+
+Check network interface speeds (y/n)? [y]:
+- Running NIC check on all nodes
+Host        | Interface | Speed
+------------+-----------+------
+172.16.68.6 | eth2      | 1000
+172.16.68.6 | eth0      | 10000
+172.16.68.7 | eth3      | -1
+172.16.68.7 | eth2      | 1000
+172.16.68.7 | eth1      | -1
+172.16.68.7 | eth0      | 10000
+172.16.68.4 | eth2      | 1000
+172.16.68.4 | eth0      | 10000
+172.16.68.5 | eth2      | 1000
+172.16.68.5 | eth0      | 10000
+172.16.68.2 | eth2      | 1000
+172.16.68.2 | eth0      | 10000
+172.16.68.3 | eth2      | 1000
+172.16.68.3 | eth0      | 10000
