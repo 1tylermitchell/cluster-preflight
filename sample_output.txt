@@ -1,0 +1,38 @@
+172.16.68.2 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+Enter desired/expected number of nodes [4]:
+Enter data target volume (TB) [1]:
+
+- Running HDFS admin report...
+Type   | Nodes | Total_Capacity | Cap_per_Node
+-------+-------+----------------+-------------
+Found  | 6     | 10.82 TB       | 1.803TB
+Target | 4     | 1.0 TB         | 0.25TB
+
+Start ping test (y/n)? [y]:
+- Running ping test on nodes
+172.16.68.6     True
+172.16.68.7     True
+172.16.68.4     True
+172.16.68.5     True
+172.16.68.2     True
+172.16.68.3     True
+
+Test ping latency (y/n)? [y]:
+- Running ping latency test on nodes
+172.16.68.6     0.061
+172.16.68.7     0.058
+172.16.68.4     0.061
+172.16.68.5     0.027
+172.16.68.2     0.055
+172.16.68.3     0.056
+
+Disk check all nodes (y/n)? [y]:
+- Running disk check on all nodes
+Host        | DiskReport
+------------+------------------------------------------------------------------------------------------------------
+172.16.68.6 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+172.16.68.7 | OK: disks ok,
+172.16.68.4 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+172.16.68.5 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+172.16.68.2 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+172.16.68.3 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
