@@ -1,4 +1,5 @@
-172.16.68.2 | ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
+$ python healthcheck.py
+
 Enter desired/expected number of nodes [4]:
 Enter data target volume (TB) [1]:
 
