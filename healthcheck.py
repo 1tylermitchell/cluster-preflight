@@ -209,6 +209,8 @@ class Cluster():
         Each node has a default hadoop script that checks health of all disks
         sh /etc/hadoop/conf/health_check
         
+        This may be an Ambari-only script??
+        
         Output is like:
         ERROR  /mnt/d10(u) /mnt/d11(u) /mnt/d12(u) /mnt/d13(u) /mnt/d14(u) /mnt/d15(u) /mnt/d8(u) /mnt/d9(u),
          or
