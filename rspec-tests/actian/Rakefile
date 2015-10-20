@@ -1,0 +1,57 @@
+require 'rake'
+require 'rspec/core/rake_task'
+require 'yaml'
+
+properties = YAML.load_file('properties.yaml')
+
+task :spec    => 'spec:all'
+task :default => :spec
+
+clusterreport,nodesreport = `sudo su hdfs -c 'hdfs dfsadmin -report'`.split("\n\n-------------------------------------------------\n")
+nodesreplist=nodesreport.strip.split("\n")
+
+livenodes = nodesreplist.grep(/Live/)[0].split(" ")[2].delete("():")
+nodenamelist = nodesreplist.grep(/Name/)
+nodenamelist = nodenamelist.map! { |n| n.split(":")[0] == "Name" ? n.split(":")[1].strip : n }.sort
+
+namespace :spec do
+  targets = []
+  Dir.glob('./spec/*').each do |dir|
+    next unless File.directory?(dir)
+    targets << File.basename(dir)
+  end
+
+  task :all     => targets
+  #task :all => nodenamelist
+  task :default => :all
+
+#  nodenamelist.each do |host|
+#    begin
+#      desc "Run serverspec to #{host}"
+#      RSpec::Core::RakeTask.new(host) do |t|
+#        ENV['TARGET_HOST'] = host
+#      end
+
+      targets.each do |target|
+        desc "Run serverspec tests to #{target}"
+	puts "... Checking target: #{target}"
+
+        nodenamelist.each do |host|
+	puts "... check host: #{host} and target #{target}"
+          begin
+            desc "Run serverspec to #{host}"
+            RSpec::Core::RakeTask.new(host) do |t|
+              ENV['TARGET_HOST'] = host
+          end
+
+          RSpec::Core::RakeTask.new(target.to_sym) do |t|
+puts "Doing task: #{t}"
+            ENV['TARGET_HOST'] = target
+            t.pattern = "spec/#{target}/*_spec.rb"
+          end # patterns
+
+        end # hosts
+      end # targets
+    end # node spec
+#  end # hosts
+end # namespace
