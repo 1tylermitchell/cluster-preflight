@@ -10,7 +10,7 @@ nodesreplist=nodesreport.strip.split("\n")
 livenodes = nodesreplist.grep(/Live/)[0].split(" ")[2].delete("():")
 nodenamelist = nodesreplist.grep(/Name/)
 nodenamelist = nodenamelist.map! { |n| n.split(":")[0] == "Name" ? n.split(":")[1].strip : n }.sort
-nodenamelist = ["172.16.68.3", "172.16.68.2", "172.16.68.4", "172.16.68.5", "172.16.68.6", "172.16.68.7"]
+#nodenamelist = ["172.16.68.3", "172.16.68.2", "172.16.68.4", "172.16.68.5", "172.16.68.6", "172.16.68.7"]
 
 task :spec => 'spec:all'
 task :default => :spec 
