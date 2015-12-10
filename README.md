@@ -1,6 +1,7 @@
 This project has two parts:
-  * healthcheck.py: one a simple Python based test script for checking cluster health.  This approach was abandoned but remains for reference in all the files in this folder (healthcheck.py, etc).
-  * healthcheck-1.0.0-linux-ruby: the other is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from Serverspec-example (Vincent Bernat).  See my blog post explaining this in a bit more detail: http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/
+  * healthcheck-1.0.0-linux-ruby folder: this is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from Serverspec-example (Vincent Bernat).  See my blog post explaining this in a bit more detail: http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/ - it queries YARN to get a list of the Hadoop nodes in a cluster and runs a series of checks on each one, producing a report that can be viewed through a web browser.
+  *  healthcheck.py: one a simple Python based test script for checking cluster health.  This approach was abandoned but remains for reference in all the files in this folder (healthcheck.py, etc).
+  *  All other files in this folder are for supporting the healthcheck.py script and can be ignored until I clean them up.
   
 ----------
 # healthcheck-1.0.0-linux-ruby
