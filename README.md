@@ -1,3 +1,25 @@
+This project has two parts:
+  * healthcheck.py: one a simple Python based test script for checking cluster health.  This approach was abandoned but remains for reference in all the files in this folder (healthcheck.py, etc).
+  * healthcheck-1.0.0-linux-ruby: the other is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from Serverspec-example (Vincent Bernat).  See my blog post explaining this in a bit more detail: http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/
+  
+----------
+# healthcheck-1.0.0-linux-ruby
+Self contained Ruby app with all libs and binaries required.
+
+## Sample usage ##
+A couple simple startup scripts are included.  Main apps are located in lib/app folder if you want to dig into them further.
+
+**Launch:**
+
+  * ./healthcheck.sh
+  
+**View reports:**
+
+  * ./reportserv.sh
+  * Then view report server at http://localhost:5000/viewer
+  * Currently there are issues with the Ruby web server used here so I have used a Python web server for testing so far
+
+----------
 # healthcheck.py
 Cluster and Vector on Hadoop SQL database health checking script
 
