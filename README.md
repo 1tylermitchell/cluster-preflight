@@ -17,7 +17,7 @@ A couple simple startup scripts are included.  Main apps are located in lib/app 
 
   * ./reportserv.sh
   * Then view report server at http://localhost:5000/viewer
-  * Currently there are issues with the Ruby web server used here so I have used a Python web server for testing so far
+  * Currently there are issues with the built-in Ruby web server used here so I have used a Python web server for testing so far: ./reportserv_py.sh
 
 ----------
 # healthcheck.py
