@@ -96,7 +96,7 @@ class ServerspecTask < RSpec::Core::RakeTask
 
 end
 
-hosts = hdfsnodes() 
+hosts = yarnnodes() 
 hosts.map! { |host|
   host.strip!
   {
