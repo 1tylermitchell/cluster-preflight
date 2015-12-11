@@ -16,7 +16,6 @@ def roles(host)
     roles << "all"
   else
     roles << "Disk"
-    roles << "all"
     roles << "Data_nodes"
     roles << "HDP_ports"
     roles << "net"
