@@ -7,6 +7,10 @@ This project has two parts:
 # healthcheck-1.0.0-linux-ruby
 Self contained Ruby app with all libs and binaries required.
 
+To install, grab the master zip file.  On some command line systems you will need to use to curl with the -L option:
+
+ * curl -Lo master.zip https://github.com/1tylermitchell/healthcheck/archive/master.zip
+  
 ## Sample usage ##
 A couple simple startup scripts are included.  Main apps are located in lib/app folder if you want to dig into them further.
 
