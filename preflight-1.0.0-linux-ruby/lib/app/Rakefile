@@ -21,6 +21,7 @@ def roles(host)
     roles << "net"
     roles << "Memory"
     roles << "OS"
+    roles << "vectorh"
   end
   roles
 end
