@@ -1,8 +1,0 @@
-$ hdfs dfsadmin -printTopology
-    Rack: /default-rack
-       172.16.68.2:50010 (padb-cluster2)
-       172.16.68.3:50010 (padb-cluster3)
-       172.16.68.4:50010 (padb-cluster4)
-       172.16.68.5:50010 (padb-cluster5)
-       172.16.68.6:50010 (padb-cluster6)
-       172.16.68.7:50010 (padb-cluster7)
