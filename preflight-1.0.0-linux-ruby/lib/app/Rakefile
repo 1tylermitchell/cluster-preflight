@@ -58,6 +58,12 @@ def yarnnodes()
   nodes
 end
 
+def hostlistnodes()
+  nodes = `cat ../../hosts.txt`.split("\n")
+  nodes
+end
+
+
 
 
 #$HOSTS    = nodenamelist.to_s #File.join(".", "hosts") # List of all hosts
@@ -97,7 +103,12 @@ class ServerspecTask < RSpec::Core::RakeTask
 
 end
 
-hosts = yarnnodes() 
+if File.exist?("../../hosts.txt") 
+  hosts = hostlistnodes()
+else 
+  hosts = yarnnodes()
+end
+
 hosts.map! { |host|
   host.strip!
   {

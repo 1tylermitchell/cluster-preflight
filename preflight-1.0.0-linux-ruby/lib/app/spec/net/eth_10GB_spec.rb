@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Fastest network interface speed >= 1GB" do
+describe "Fastest network interface speed >= 10GB" do
 	it {
 		linkspeeds = []
 		devlines=`ip -o link show`.split("\n")
