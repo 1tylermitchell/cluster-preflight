@@ -2,6 +2,7 @@ require 'serverspec'
 require 'pathname'
 #require 'net/ssh'
 
+ENV['HADOOP_CLIENT_OPTS']=nil
 #include Serverspec::Helper::Ssh
 #include Serverspec::Helper::DetectOS
 #
