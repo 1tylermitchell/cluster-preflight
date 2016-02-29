@@ -18,6 +18,7 @@ A couple simple startup scripts are included.  Main apps are located in lib/app 
 **Launch:**
 
   * `./preflight.sh`
+  * If Hadoop gives annoying warning messages then ignore them with: `./preflight.sh 2> /dev/null`
   
 **View reports:**
 
