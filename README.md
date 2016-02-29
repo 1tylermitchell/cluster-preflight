@@ -4,6 +4,8 @@ No installation is required, only download and unzip.
 
 This is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from [ Serverspec-example by Vincent Bernat](https://github.com/vincentbernat/serverspec-example).  See [my blog post](http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/) explaining this in a bit more detail - it queries YARN to get a list of the Hadoop nodes in a cluster and runs a series of checks on each one, producing a report that can be viewed through a web browser.
 
+![screenshot](https://github.com/1tylermitchell/cluster-preflight/blob/master/vincentbernat-serverspec-report.1.png)
+
 ----------
 # Installation #
 Self contained Ruby app with all libs and binaries required.
