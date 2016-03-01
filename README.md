@@ -2,7 +2,8 @@ This application is designed to check the settings of a modern, Linux-based, Had
 
 No installation is required, only download and unzip.
 
-This is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from [ Serverspec-example by Vincent Bernat](https://github.com/vincentbernat/serverspec-example).  See [my blog post](http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/) explaining this in a bit more detail - it queries YARN to get a list of the Hadoop nodes in a cluster and runs a series of checks on each one, producing a report that can be viewed through a web browser.
+This is a Ruby-based serverspec example - deployed as a Travelling Ruby app, developed from [ Serverspec-example by Vincent Bernat](https://github.com/vincentbernat/serverspec-example).  See my [overview video on YouTube](https://youtu.be/8XBqz7ZWB-g) or
+[my slightly older blog post](http://www.makedatauseful.com/serverspec-checks-settings-on-a-hadoop-cluster/) explaining this in a bit more detail - it queries YARN to get a list of the Hadoop nodes in a cluster and runs a series of checks on each one, producing a report that can be viewed through a web browser.
 
 ![screenshot](https://github.com/1tylermitchell/cluster-preflight/blob/master/vincentbernat-serverspec-report.1.png)
 
@@ -91,6 +92,7 @@ Here is a list of the checks that are done in the app:
  * Version is at least 4.2.2 patch 22108
 
 # Next Steps and Improvements #
+ * Global config file for setting main values and thresholds
  * Simplify HDFS throughout checks 
  * Include additional VectorH performance checks
  * Allow master node analysis to be done separately from data nodes, requires manual list defining which are which
